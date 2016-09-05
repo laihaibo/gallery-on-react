@@ -35,6 +35,8 @@ body
     height: 100%;
 
     background-color: #ddd;
+
+    perspective: 1800px;
     @at-root
     {
         .img-figure
@@ -42,14 +44,43 @@ body
             position: absolute;
 
             box-sizing: border-box;
-            width: 272px;
+            width: 256px;
             height: 420px;
             margin: 0;
-            padding: 16px;
+            padding: 8px;
+
+            cursor: pointer;
+            transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
+            transform-origin: 0 50% 0;
 
             border-radius: 3px;
             background-color: #eee;
             box-shadow: 0 3px 4px 0 rgba(0,0,0,.14),0 3px 3px -2px rgba(0,0,0,.2),0 1px 8px 0 rgba(0,0,0,.12);
+
+            transform-style: preserve-3d;
+            &.is-inverse
+            {
+                transform: translate(256px) rotateY(180deg);
+            }
+        }
+        .img-back
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 16px;
+
+            transform: rotateY(180deg) translateZ(1px);
+            text-align: center;
+
+            color: #666;
+            background: #eee;
+
+            backface-visibility: hidden;
         }
     }
     figcaption
@@ -77,3 +108,4 @@ body
 
     text-align: center;
 }
+
