@@ -1,111 +1,119 @@
 /* Base Application Styles */
-html,
-body
-{
-    font-family: 'Microsoft YaHei';
 
+@font-face {
+    font-family: 'iconfont';
+    src: url('../fonts/icons/iconfont.eot') format("embedded-opentype"), /* IE9*/
+    url('../fonts/icons/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('../fonts/icons/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../fonts/icons/iconfont.svg') format('svg');
+    /* iOS 4.1- */
+}
+
+html,
+body {
+    font-family: 'Microsoft YaHei';
     width: 100%;
     height: 100%;
-
     color: #fff;
     background: #222;
 }
 
-.content
-{
+.content {
     width: 100%;
     height: 100%;
 }
 
-.stage
-{
+.stage {
     position: relative;
-
     width: 100%;
     height: 100%;
 }
 
-.img-sec
-{
+.img-sec {
     position: relative;
-
     overflow: hidden;
-
     width: 100%;
     height: 100%;
-
     background-color: #ddd;
-
     perspective: 1800px;
-    @at-root
-    {
-        .img-figure
-        {
+    @at-root {
+        .img-figure {
             position: absolute;
-
             box-sizing: border-box;
             width: 256px;
             height: 420px;
             margin: 0;
             padding: 8px;
-
             cursor: pointer;
             transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
             transform-origin: 0 50% 0;
-
             border-radius: 3px;
             background-color: #eee;
-            box-shadow: 0 3px 4px 0 rgba(0,0,0,.14),0 3px 3px -2px rgba(0,0,0,.2),0 1px 8px 0 rgba(0,0,0,.12);
-
+            box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
             transform-style: preserve-3d;
-            &.is-inverse
-            {
+            &.is-inverse {
                 transform: translate(256px) rotateY(180deg);
             }
         }
-        .img-back
-        {
+        .img-back {
             position: absolute;
             top: 0;
             left: 0;
-
             box-sizing: border-box;
             width: 100%;
             height: 100%;
             padding: 16px;
-
             transform: rotateY(180deg) translateZ(1px);
             text-align: center;
-
             color: #666;
             background: #eee;
-
             backface-visibility: hidden;
         }
     }
-    figcaption
-    {
+    figcaption {
         text-align: center;
-
         color: #222;
-        .img-title
-        {
+        .img-title {
             font-size: 16px;
-
             margin: 10px 0 0 0;
         }
     }
 }
 
-.controller-nav
-{
+.controller-nav {
     position: absolute;
     z-index: 101;
     bottom: 30px;
     left: 0;
-
     width: 100%;
-
     text-align: center;
+    @at-root {
+        .controller-unit {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-color: #aaa;
+            border-radius: 50%;
+            transform: scale(0.6);
+            transition: transform .6s ease-in-out, background .3s;
+            &.is-center {
+                transform: scale(1);
+                background-color: #888;
+                &::after {
+                    color: #fff;
+                    font-family: 'iconfont';
+                    content: '\e906';
+                    line-height: 30px;
+                }
+                &.is-inverse {
+                    background: #555;
+                    transform: rotateY(180deg);
+                }
+            }
+        }
+    }
 }
-
