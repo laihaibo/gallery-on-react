@@ -29,7 +29,7 @@ function getDefaultModules() {
                 loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
             }, {
                 test: /\.scss/,
-                loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader?outputStyle=expanded'
+                loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader?outputStyle=expanded' //为scss添加autoprefixer支持
             }, {
                 test: /\.less/,
                 loader: 'style-loader!css-loader!less-loader'
@@ -37,12 +37,13 @@ function getDefaultModules() {
                 test: /\.styl/,
                 loader: 'style-loader!css-loader!stylus-loader'
             }, {
-                test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/, //添加了iconfont的支持
                 loader: 'url-loader?limit=8192'
             }, {
                 test: /\.(mp4|ogg|svg)$/,
                 loader: 'file-loader'
             }
+            // 新版json-load无须这样加载，只需要要修改main.js
             // {
             //  test: /\.json$/,
             //  loader:'json-loader'
@@ -53,7 +54,7 @@ function getDefaultModules() {
 
 module.exports = {
     srcPath: srcPath,
-    publicPath: './assets/',
+    publicPath: '/assets/', //防止打包后，读取图片资源失败，由绝对路径改为相对路径
     port: dfltPort,
     getDefaultModules: getDefaultModules
 };

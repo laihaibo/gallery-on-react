@@ -4,10 +4,11 @@ require('styles/App.scss');
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//获取图片相关数据
+//获取图片相关数据，新版json-loader写法，正式发布后可加载网络图片地址
 let imageDatas = require('json!../data/imageDatas.json');
-// 利用只执行函数，将图片名信息转换成图片url路径信息
-imageDatas = (function genImageURL(imageDatasArr) {
+
+// 利用自执行函数，将图片名信息转换成图片url路径信息
+imageDatas = ((imageDatasArr)=>{
     for (let i = 0, j = imageDatasArr.length; i < j; i++) {
         let singleImageData = imageDatasArr[i];
         singleImageData.imageURL = require('../images/' + singleImageData.fileName);
@@ -16,15 +17,17 @@ imageDatas = (function genImageURL(imageDatasArr) {
     return imageDatasArr;
 })(imageDatas);
 
+//获取一个范围内的随机值，用于处理图片的分布区间
 function getRangeRandom(low, high) {
     return Math.floor(Math.random() * (high - low) + low);
 }
 
-//获取0-30的旋转角度
+//获取0-30的图片旋转角度
 function getDegRandom() {
     return ((Math.random() > 0.5 ? '+' : '-') + Math.floor(Math.random() * 30));
 }
 
+// 定义一个图片组件
 class ImgFigure extends React.Component {
 
     constructor(props) {
@@ -51,16 +54,19 @@ class ImgFigure extends React.Component {
 
         // 如果图片有旋转角度，添加
         if (this.props.arrange.rotate) {
+            // 为style添加前缀，兼容ff15
             (['Moz', 'Ms', 'Webkit', '']).forEach((value) => {
                 styleObj[value + 'Transform'] = 'rotate(' + this.props.arrange.rotate + 'deg)';
             });
         }
 
+        //使中心图片不会被遮挡
         if (this.props.arrange.isCenter) {
             styleObj.zIndex = 11;
         }
 
         let imgFigureClassName = 'img-figure';
+        //为翻转的图片添加class
         imgFigureClassName += this.props.arrange.isInverse ? ' is-inverse' : '';
         return (
             <figure className={imgFigureClassName} style={styleObj} onClick={this.handleClick}>
@@ -76,6 +82,7 @@ class ImgFigure extends React.Component {
     }
 }
 
+//定义控制组件
 class ControllerUnit extends React.Component {
     constructor(props) {
       super(props);
@@ -203,7 +210,7 @@ class AppComponent extends React.Component {
             }
         });
 
-        // left
+        // 布局位于左右的图片
         for (let i = 0, j = imgsArrangeArr.length, k = j / 2; i < j; i++) {
             let hPosRangeLORX = null;
             if (i < k) {
@@ -242,7 +249,7 @@ class AppComponent extends React.Component {
     //   }
     // }
 
-    //组件加载之后，为每张图片计算其位置的范围
+    //组件加载之后，为每张图片计算其位置的范围，（不考虑覆盖）每张图片至少在页面中出现1/4
     componentDidMount() {
         let stageDOM = ReactDOM.findDOMNode(this.refs.stage),
             stageW = stageDOM.scrollWidth,
@@ -298,6 +305,7 @@ class AppComponent extends React.Component {
                     isCenter: false
                 }
             }
+            //增加key值为了提高虚拟dom的性能
             imgFigures.push(<ImgFigure key={index} data={value} ref={'imgFigure' + index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)}/>);
            controllerUnits.push(<ControllerUnit key={index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)}/>);
                 });
