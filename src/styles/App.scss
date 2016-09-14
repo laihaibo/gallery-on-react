@@ -29,6 +29,7 @@ body {
     height: 100%;
 }
 
+//图片样式
 .img-sec {
     position: relative;
     overflow: hidden;
@@ -41,7 +42,7 @@ body {
             position: absolute;
             box-sizing: border-box;
             width: 256px;
-            height: 420px;
+            height: 300px;
             margin: 0;
             padding: 8px;
             cursor: pointer;
@@ -80,6 +81,7 @@ body {
     }
 }
 
+//控制条样式
 .controller-nav {
     position: absolute;
     z-index: 101;

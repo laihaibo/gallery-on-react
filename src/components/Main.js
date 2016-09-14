@@ -11,7 +11,8 @@ let imageDatas = require('json!../data/imageDatas.json');
 imageDatas = ((imageDatasArr)=>{
     for (let i = 0, j = imageDatasArr.length; i < j; i++) {
         let singleImageData = imageDatasArr[i];
-        singleImageData.imageURL = require('../images/' + singleImageData.fileName);
+        // singleImageData.imageURL = require('../images/' + singleImageData.fileName);
+        singleImageData.imageURL = 'http://obzb8xxij.bkt.clouddn.com/' + singleImageData.fileName;
         imageDatasArr[i] = singleImageData;
     }
     return imageDatasArr;
