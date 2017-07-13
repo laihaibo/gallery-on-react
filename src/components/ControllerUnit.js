@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class ControllerUnit extends Component {
     constructor(props) {
@@ -18,10 +19,16 @@ class ControllerUnit extends Component {
             this
                 .props
                 .onCenter(this.props.id);
-                this.props.onInit(this.props.id);
+            this
+                .props
+                .onInit(this.props.id);
         }
         e.stopPropagation();
         e.preventDefault();
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.pos.left !== this.props.left
     }
 
     render() {
@@ -38,6 +45,16 @@ class ControllerUnit extends Component {
             <span className={controllerUnitClassName} onClick={this.handleClick}></span>
         );
     }
+}
+
+ControllerUnit.propTypes = {
+    onCenter: PropTypes.func.isRequired,
+    isCenter: PropTypes.bool.isRequired,
+    onInverse: PropTypes.func.isRequired,
+    isInverse: PropTypes.bool.isRequired,
+    onInit: PropTypes.func.isRequired,
+    pos: PropTypes.object.isRequired,
+    id: PropTypes.number.isRequired
 }
 
 export default ControllerUnit;
