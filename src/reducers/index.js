@@ -1,13 +1,15 @@
-import {SET_INVERSE, SET_CENTER,SET_UPDATE} from '../actions';
+import {SET_INVERSE, SET_CENTER, SET_UPDATE} from '../actions';
 
 import data from '../static/data';
 let nData = data.map((img, index) => ({
   ...img,
-  // imgURL: `http://obzb8xxij.bkt.clouddn.com/${img.fileName}`,
-  imgURL: require(`../static/images/${index}.jpg`),
+  imgURL: `http://obzb8xxij.bkt.clouddn.com/${img.fileName}`,
+  // imgURL: require(`../static/images/${index}.jpg`),
   id: index,
   isCenter: false,
-  isInverse: false
+  isInverse: false,
+  pos: {},
+  rotate: ''
 }))
 
 export default(state = nData, action) => {
@@ -31,10 +33,7 @@ export default(state = nData, action) => {
         }
         : img);
     case SET_UPDATE:
-      // return state.map(img=>({
-      //   ...img,
-      //   xixi:123
-      // }));
+      // return state.map(img=>({   ...img,   xixi:123 }));
       return [...action.config];
     default:
       return state;
