@@ -5,7 +5,7 @@
 * 将数据存储于`store`，所有组件共享一份数据。解决了组件间传值问题。一处改变，就可以响应式的更新。
 * 设计三个`action`，分别用于初始化/升级排布数组`update`、设置居中（后来发现其实可以省略）`center`、设置翻转`inverse`
 ## 点击查看
-[http://laihaibo.xyz/gallery-on-react/build/index.html](http://laihaibo.xyz/gallery-on-react/dist/index.html)
+[http://laihaibo.xyz/gallery-on-react/build/index.html](http://laihaibo.xyz/gallery-on-react/build/index.html)
 ## 安装
 ```
     1. npm i
